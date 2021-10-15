@@ -19,14 +19,14 @@ Store.create(name: "Yaletown", annual_revenue: 430000,  mens_apparel: true,  wom
 
 @mens_stores = Store.where(mens_apparel: true).order(created_at: :desc)
 
-puts "----------"
+
 # Loop through each of these stores and output their name and annual revenue on each line.
 @mens_stores.each do |store|
 	puts "name: #{store.name} revenue: #{store.name}"
 end
 
 # Do another fetch but this time load stores that carry women's apparel and are generating less than $1M in annual revenue.
-@womens_stores = Store.where(womens_apparel: true, annual_revenue: 430000).order(created_at: :desc)
+@womens_stores = Store.where(womens_apparel: true).where("annual_revenue < ?", 1000000).order(created_at: :desc)
 
 @womens_stores.each do |store|
 	puts "----------"
